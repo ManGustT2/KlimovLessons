@@ -29,14 +29,13 @@
             <intent-filter>
                 <action android:name="android.intent.action.WEB_SEARCH" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
 
         </activity>
 
         <activity
-            android:name=".SecondActivity"
+            android:name=".view.lesson18.SecondActivity"
             android:label="@string/title_activity_second" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
