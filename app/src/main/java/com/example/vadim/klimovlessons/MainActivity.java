@@ -3,11 +3,12 @@ package com.example.vadim.klimovlessons;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.vadim.klimovlessons.adapter.MyAdapter;
 import com.example.vadim.klimovlessons.model.Lesson;
 import com.example.vadim.klimovlessons.view.lesson16.lessonSixteen;
 import com.example.vadim.klimovlessons.view.lesson17.Sunrise;
@@ -17,8 +18,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Lesson> lessons = new ArrayList<Lesson>();
-    private MyAdapter myAdapter;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManeger;
+
+  //  private ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 
 
     @Override
@@ -26,41 +30,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fillData();
-        myAdapter = new MyAdapter(this, lessons);
+        String[] myDataset = getDataSet();
 
-        ListView LVMain = (ListView) findViewById(R.id.lvMain);
-        LVMain.setAdapter(myAdapter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.rvMain);
 
-        LVMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = null;
-                switch (position){
-                    case  0:
-                        intent = new Intent(MainActivity.this, lessonSixteen.class);
-                        break;
-                    case 1:
-                        intent = new Intent(MainActivity.this, Sunrise.class);
-                        break;
-                    case 2:
-                        intent = new Intent(MainActivity.this, MyBrowser.class);
-                        break;
+        mRecyclerView.setHasFixedSize(true);
 
-                }
-
-                startActivity(intent);
-
-            }
-        });
-
-    }
-
-
-    void fillData() {
-        for (int i =1; i<=15; i++){
-            lessons.add(new Lesson("Lesson" + " " + i));
-
+        mLayoutManeger = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManeger);
         }
+
+        private String[] getDataSet(){
+            String[] mDataSet = new String[15];
+            for (int i=0; i<15; i++ ){
+                mDataSet[i] = "Lesson" + i;
+            }
+            return mDataSet;
+
+
+
+//        fillData();
+
+//        ListView LVMain = (ListView) findViewById(R.id.lvMain);
+//
+//        LVMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent = null;
+//                switch (position){
+//                    case  0:
+//                        intent = new Intent(MainActivity.this, lessonSixteen.class);
+//                        break;
+//                    case 1:
+//                        intent = new Intent(MainActivity.this, Sunrise.class);
+//                        break;
+//                    case 2:
+//                        intent = new Intent(MainActivity.this, MyBrowser.class);
+//                        break;
+//
+//                }
+//
+//                startActivity(intent);
+
+//            }
+//        });
+
+//    }
+
+
     }
 }
