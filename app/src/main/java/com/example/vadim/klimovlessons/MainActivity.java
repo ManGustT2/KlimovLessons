@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.vadim.klimovlessons.adapter.RecyclerAdapter;
 import com.example.vadim.klimovlessons.model.Lesson;
 import com.example.vadim.klimovlessons.view.lesson16.lessonSixteen;
 import com.example.vadim.klimovlessons.view.lesson17.Sunrise;
@@ -19,25 +20,24 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private RecyclerAdapter rvAdapter;
     private RecyclerView.LayoutManager mLayoutManeger;
-
-  //  private ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         String[] myDataset = getDataSet();
-
+        rvAdapter = new RecyclerAdapter(myDataset);
         mRecyclerView = (RecyclerView) findViewById(R.id.rvMain);
-
         mRecyclerView.setHasFixedSize(true);
-
         mLayoutManeger = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManeger);
+        mRecyclerView.setAdapter(rvAdapter);
+
+
+
         }
 
         private String[] getDataSet(){
@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//        fillData();
 
+
+//        fillData();
+//
 //        ListView LVMain = (ListView) findViewById(R.id.lvMain);
 //
 //        LVMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,10 +73,10 @@ public class MainActivity extends AppCompatActivity {
 //                }
 //
 //                startActivity(intent);
-
+//
 //            }
 //        });
-
+//
 //    }
 
 
